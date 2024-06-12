@@ -8,15 +8,15 @@ reserva_bp = Blueprint("reserva", __name__)
 @jwt_required
 @role_required(["admin","customer"])
 def get_restaurantes():
-    restaurantes = Reserva.get_all_restaurantes()
-    return jsonify(render_reservas(restaurantes))
+    reservaciones = Reserva.get_all_reservaciones()
+    return jsonify(render_reservas(reservaciones))
 
 @reserva_bp.route("/reservations/<int:id>",methods=["GET"])
 @jwt_required
 @role_required(["admin","customer"])
 def get_restaurante(id):
-    restaurante = Reserva.get_id_reservacion(id)
-    return jsonify(render_detail_reserva(restaurante))
+    reservacion = Reserva.get_id_reservacion(id)
+    return jsonify(render_detail_reserva(reservacion))
 
 @reserva_bp.route("/reservations",methods=["POST"])
 @jwt_required
