@@ -11,7 +11,7 @@ class User(db.Model, UserMixin):
     phone = db.Column(db.String(50),nullable = False)
     role = db.Column(db.String(50),nullable = False)
 
-    def __init__(self,name,email,password,phone,role):
+    def __init__(self,name,email,password,phone,role=[]):
         self.name = name
         self.email = email
         self.password = generate_password_hash(password)
@@ -20,7 +20,7 @@ class User(db.Model, UserMixin):
     
     @staticmethod
     def find_user(email):
-        return User.query.find(email=email).first()
+        return User.query.filter_by(email=email).first()
     
     def save(self):
         db.session.add(self)
